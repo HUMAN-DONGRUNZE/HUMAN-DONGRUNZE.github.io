@@ -1,0 +1,513 @@
+/* === style.css — 主样式：霓虹主题、布局、响应式 === */
+
+/* —————————— 主题变量 & 过渡 —————————— */
+:root {
+    --bg-color: #ffffff;
+    --text-color: #1e1e1e;
+    --border-color: #eaeaea;
+    --nav-bg: rgba(255, 255, 255, 0.92);
+    --btn-hover-bg: rgba(214, 110, 253, 0.08);
+    --brand-color: #1e1e1e;
+    --title-glow: 0 0 20px rgba(214, 110, 253, 0.4);
+    --gradient-purple: linear-gradient(135deg,
+        rgba(214, 110, 253, 0.95),
+        rgba(138, 43, 226, 0.95));
+    --footer-text: #4a4a4a;
+    --card-bg: #fafafa;
+    --neon-glow: 0 0 15px rgba(214, 110, 253, 0.7);
+    --neon-color: #d66efd;
+}
+
+[data-theme="dark"] {
+    --bg-color: #0f0f0f;
+    --text-color: #f0f0f0;
+    --border-color: #2a2a2a;
+    --nav-bg: rgba(15, 15, 15, 0.92);
+    --btn-hover-bg: rgba(214, 110, 253, 0.18);
+    --brand-color: #ffffff;
+    --title-glow: 0 0 30px rgba(214, 110, 253, 0.8);
+    --footer-text: #a0a0a0;
+    --card-bg: #1a1a1a;
+    --neon-glow: 0 0 15px rgba(214, 110, 253, 0.7);
+    --neon-color: #d66efd;
+}
+
+/* 全局过渡 — 丝滑主题切换 */
+body, .main-nav, .nav-btn, .content-section, .footer, 
+.main-title, .nav-brand span, .login-btn {
+    transition: 
+        background-color 0.4s ease,
+        color 0.3s ease,
+        border-color 0.4s ease,
+        box-shadow 0.3s ease;
+}
+
+/* —————————— 基础重置 —————————— */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Inter", "SF Pro Display", "Segoe UI", "Microsoft YaHei", sans-serif;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    padding-top: 64px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+#header-placeholder,
+#footer-placeholder {
+    flex-shrink: 0;
+}
+
+#footer-placeholder {
+    margin-top: auto;
+}
+
+/* 固定导航栏 */
+.main-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    background: var(--nav-bg);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border-color);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+}
+
+.nav-container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 64px;
+}
+
+.nav-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 650;
+    font-size: 1.25rem;
+    letter-spacing: -0.01em;
+    color: var(--brand-color);
+    z-index: 1001;
+}
+
+.nav-group {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+}
+
+.nav-items {
+    display: flex;
+    gap: 8px;
+}
+
+.nav-btn {
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--text-color);
+    padding: 8px 18px;
+    border-radius: 40px;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    opacity: 0.85;
+}
+
+.nav-btn:hover {
+    background: var(--btn-hover-bg);
+    opacity: 1;
+}
+
+.nav-btn.active {
+    background: linear-gradient(135deg, 
+        rgba(214, 110, 253, 0.18), 
+        rgba(138, 43, 226, 0.12));
+    color: #b87aff;
+    font-weight: 550;
+    opacity: 1;
+}
+
+.nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.login-btn {
+    background: var(--gradient-purple);
+    color: white !important;
+    padding: 8px 22px;
+    border-radius: 40px;
+    border: none;
+    font-weight: 500;
+    font-size: 0.95rem;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(138, 43, 226, 0.2);
+    transition: transform 0.2s ease, box-shadow 0.2s;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.login-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px rgba(138, 43, 226, 0.25);
+}
+
+.theme-toggle-btn {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    padding: 6px;
+    cursor: pointer;
+    transition: transform 0.25s ease;
+    line-height: 1;
+}
+
+.theme-toggle-btn:hover {
+    transform: rotate(12deg);
+}
+
+/* 移动端菜单按钮 */
+.mobile-menu-btn {
+    display: none;
+    background: none;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    z-index: 1001;
+}
+
+.menu-icon {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: var(--text-color);
+    position: relative;
+    transition: all 0.3s ease;
+    border-radius: 4px;
+}
+
+.menu-icon::before,
+.menu-icon::after {
+    content: '';
+    position: absolute;
+    width: 24px;
+    height: 2px;
+    background: var(--text-color);
+    transition: all 0.3s ease;
+    border-radius: 4px;
+}
+
+.menu-icon::before { transform: translateY(-7px); }
+.menu-icon::after { transform: translateY(7px); }
+
+.mobile-menu-btn.active .menu-icon {
+    background: transparent;
+}
+.mobile-menu-btn.active .menu-icon::before {
+    transform: rotate(45deg);
+}
+.mobile-menu-btn.active .menu-icon::after {
+    transform: rotate(-45deg);
+}
+
+/* —————————— 主页超大霓虹标题 —————————— */
+.main-title {
+    font-size: clamp(64px, 15vw, 160px);
+    font-weight: 900;
+    background: linear-gradient(135deg, #d66efd, #b44cf0, #8a2be2);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-align: center;
+    line-height: 1.1;
+    margin: 0;
+    text-shadow: var(--neon-glow);
+    animation: neon-breath 3s ease-in-out infinite alternate;
+    letter-spacing: -0.02em;
+    padding: 0 0.5rem;
+}
+
+/* 霓虹呼吸动画 */
+@keyframes neon-breath {
+    0% {
+        text-shadow: 0 0 8px rgba(214, 110, 253, 0.4),
+                     0 0 16px rgba(180, 76, 240, 0.3);
+    }
+    100% {
+        text-shadow: 0 0 22px rgba(214, 110, 253, 0.9),
+                     0 0 40px rgba(138, 43, 226, 0.6),
+                     0 0 60px rgba(180, 76, 240, 0.3);
+    }
+}
+
+/* 极简全屏区块 */
+.fullscreen {
+    min-height: calc(100vh - 64px - 7vh);  /* 减去导航和footer高度 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 1.5rem;
+}
+
+/* 极简副标题 (可选) */
+.hero-sub {
+    margin-top: 1.2rem;
+    font-size: 1.2rem;
+    font-weight: 300;
+    letter-spacing: 4px;
+    color: var(--text-color);
+    opacity: 0.7;
+}
+
+/* —————————— 通用内容页样式 (关于/作品/联系) —————————— */
+.content-section {
+    max-width: 900px;
+    margin: 32px auto 48px;
+    padding: 2rem 2rem 1rem;
+}
+
+.content-section h2 {
+    font-size: 2.8rem;
+    font-weight: 700;
+    margin-bottom: 1.8rem;
+    background: linear-gradient(135deg, #d66efd, #b455f0);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    display: inline-block;
+    border-bottom: 3px solid rgba(214, 110, 253, 0.3);
+    padding-bottom: 8px;
+}
+
+.content-section p {
+    line-height: 1.8;
+    font-size: 1.15rem;
+    margin-bottom: 1.8rem;
+    color: var(--text-color);
+    opacity: 0.9;
+}
+
+/* 作品卡片简易网格 */
+.work-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 24px;
+    margin-top: 30px;
+}
+.work-card {
+    background: var(--btn-hover-bg);
+    backdrop-filter: blur(4px);
+    padding: 1.8rem 1.2rem;
+    border-radius: 24px;
+    border: 1px solid var(--border-color);
+    transition: transform 0.2s, border-color 0.2s;
+    text-align: center;
+}
+.work-card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(214, 110, 253, 0.5);
+}
+.work-card h3 {
+    font-size: 1.6rem;
+    margin-bottom: 0.5rem;
+    color: #b87aff;
+}
+
+/* 联系页简单样式 */
+.contact-links {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+    margin-top: 24px;
+}
+.contact-link {
+    padding: 12px 24px;
+    background: var(--btn-hover-bg);
+    border-radius: 60px;
+    text-decoration: none;
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+    transition: all 0.2s;
+}
+.contact-link:hover {
+    border-color: #d66efd;
+    background: rgba(214,110,253,0.1);
+}
+
+/* —————————— Footer —————————— */
+.footer {
+    height: 7vh;
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-top: 1px solid var(--border-color);
+    font-size: 0.9rem;
+    color: var(--footer-text);
+    background: transparent;
+    margin-top: auto;
+}
+
+/* —————————— 下载列表 —————————— */
+.download-section {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
+}
+
+.page-title {
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.download-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.download-item {
+    margin-bottom: 0.75rem;
+}
+
+.download-link {
+    display: flex;
+    align-items: center;
+    padding: 1rem 1.25rem;
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    text-decoration: none;
+    color: var(--text-color);
+    transition: all 0.25s ease;
+}
+
+.download-link:hover {
+    border-color: var(--neon-color, #d66efd);
+    box-shadow: var(--neon-glow);
+    transform: translateX(4px);
+}
+
+.download-icon {
+    font-size: 1.4rem;
+    margin-right: 0.75rem;
+    flex-shrink: 0;
+}
+
+.download-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.download-name {
+    display: block;
+    font-size: 1rem;
+    margin-bottom: 0.25rem;
+}
+
+.download-password {
+    display: block;
+    font-size: 0.8rem;
+    color: var(--footer-text);
+    opacity: 0.8;
+}
+
+.download-arrow {
+    opacity: 0.5;
+    transition: opacity 0.25s ease;
+    flex-shrink: 0;
+}
+
+.download-link:hover .download-arrow {
+    opacity: 1;
+}
+
+/* —————————— 响应式设计 —————————— */
+@media (max-width: 790px) {
+    body {
+        padding-top: 60px;
+    }
+    
+    .nav-container {
+        height: 60px;
+        padding: 0 1.5rem;
+    }
+
+    .mobile-menu-btn {
+        display: block;
+    }
+    
+    .nav-group {
+        position: fixed;
+        top: 60px;
+        left: 0;
+        width: 100%;
+        background: var(--nav-bg);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        flex-direction: column;
+        align-items: stretch;
+        padding: 24px 20px;
+        gap: 18px;
+        box-shadow: 0 20px 30px rgba(0,0,0,0.08);
+        transform: translateY(-150%);
+        transition: transform 0.3s cubic-bezier(0.2, 0.9, 0.1, 1);
+        z-index: 999;
+        border-bottom: 1px solid var(--border-color);
+    }
+    
+    .nav-group.active {
+        transform: translateY(0);
+    }
+    
+    .nav-items {
+        flex-direction: column;
+        gap: 6px;
+    }
+    
+    .nav-actions {
+        margin-top: 8px;
+        justify-content: flex-start;
+    }
+    
+    .nav-btn, .login-btn {
+        width: 100%;
+        text-align: left;
+        padding: 12px 18px;
+    }
+    
+    .fullscreen {
+        min-height: calc(100vh - 60px - 7vh);
+    }
+    
+    .main-title {
+        font-size: clamp(56px, 12vw, 100px);
+    }
+
+    .content-section {
+        padding: 1rem 1.5rem;
+    }
+    .content-section h2 {
+        font-size: 2.2rem;
+    }
+}
+
+/* 禁用滚动 (菜单打开时由js控制) */
+body.menu-open {
+    overflow: hidden;
+}

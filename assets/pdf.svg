@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Created with Vectornator (http://vectornator.io/) -->
+<svg height="100%" stroke-miterlimit="10" style="fill-rule:nonzero;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;" version="1.1" viewBox="0 0 204.8 204.8" width="100%" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:vectornator="http://vectornator.io" xmlns:xlink="http://www.w3.org/1999/xlink">
+<defs>
+<text font-family="Futura-CondensedExtraBold" font-size="70.802" id="Fill" text-anchor="start" transform="matrix(1 0 0 1 17.3431 111.36)" vectornator:width="117.569" x="0" y="0">
+<tspan textLength="114.569" x="1.5" y="71"><![CDATA[PDF]]></tspan>
+</text>
+</defs>
+<g id="Layer" vectornator:layerName="Layer">
+<g opacity="1" vectornator:layerName="成组 1">
+<path d="M10.24 0L194.56 0C200.215 0 204.8 4.5846 204.8 10.24L204.8 194.56C204.8 200.215 200.215 204.8 194.56 204.8L10.24 204.8C4.5846 204.8 0 200.215 0 194.56L0 10.24C0 4.5846 4.5846 1.77636e-15 10.24 0Z" fill="#e53935" fill-rule="nonzero" opacity="1" stroke="none" vectornator:layerName="path"/>
+<path d="M24.9669 56.9012C24.9669 52.1898 28.7863 48.3704 33.4977 48.3704L87.6633 48.3704C92.3747 48.3704 96.1941 52.1898 96.1941 56.9012L96.1941 87.2604C96.1941 91.9719 92.3747 95.7912 87.6633 95.7912L33.4977 95.7912C28.7863 95.7912 24.9669 91.9719 24.9669 87.2604L24.9669 56.9012Z" fill="#ffffff" fill-rule="nonzero" opacity="1" stroke="none" vectornator:layerName="长方形 2"/>
+<path d="M108.606 56.9012C108.606 52.1898 112.425 48.3704 117.137 48.3704L171.302 48.3704C176.014 48.3704 179.833 52.1898 179.833 56.9012L179.833 87.2604C179.833 91.9719 176.014 95.7912 171.302 95.7912L117.137 95.7912C112.425 95.7912 108.606 91.9719 108.606 87.2604L108.606 56.9012Z" fill="#ffffff" fill-rule="nonzero" opacity="1" stroke="none" vectornator:layerName="长方形 3"/>
+<path d="M24.9669 117.54C24.9669 112.828 28.7863 109.009 33.4977 109.009L87.6633 109.009C92.3747 109.009 96.1941 112.828 96.1941 117.54L96.1941 147.899C96.1941 152.61 92.3747 156.43 87.6633 156.43L33.4977 156.43C28.7863 156.43 24.9669 152.61 24.9669 147.899L24.9669 117.54Z" fill="#ffffff" fill-rule="nonzero" opacity="1" stroke="none" vectornator:layerName="长方形 4"/>
+<path d="M108.606 117.54C108.606 112.828 112.425 109.009 117.137 109.009L171.302 109.009C176.014 109.009 179.833 112.828 179.833 117.54L179.833 147.899C179.833 152.61 176.014 156.43 171.302 156.43L117.137 156.43C112.425 156.43 108.606 152.61 108.606 147.899L108.606 117.54Z" fill="#ffffff" fill-rule="nonzero" opacity="1" stroke="none" vectornator:layerName="长方形 5"/>
+<g opacity="1" vectornator:layerName="文本 1">
+<use fill="#ffffff" stroke="none" xlink:href="#Fill"/>
+<mask height="301.315" id="StrokeMask" maskUnits="userSpaceOnUse" width="356.906" x="-101.392" y="5.05733">
+<rect fill="#ffffff" height="301.315" stroke="none" width="356.906" x="-101.392" y="5.05733"/>
+<use fill="#000000" fill-rule="evenodd" stroke="none" xlink:href="#Fill"/>
+</mask>
+<use fill="none" mask="url(#StrokeMask)" stroke="#e53935" stroke-linecap="butt" stroke-linejoin="round" stroke-width="10" xlink:href="#Fill"/>
+</g>
+</g>
+</g>
+</svg>
